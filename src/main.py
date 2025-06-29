@@ -1,36 +1,65 @@
-'''import os
-from dotenv import load_dotenv
-from openai import OpenAI
-import tiktoken 
+# src/main.py
 
-load_dotenv('.env')
-
-# Pass the API Key to the OpenAI Client
-client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-
-load_dotenv()  # loads .env into os.environ
-os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
-'''
-
-
-'''
-# 1. Load exactly the file named ".env" in your working directory
-load_dotenv('.env')
-
-# 2. Read the key from the now-populated environment
-api_key = os.getenv('OPENAI_API_KEY')
-
-# 3. Pass it directly into the client
-client = OpenAI(api_key=api_key)
-'''
-
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
+
 import streamlit as st
 from openai import OpenAI
 
-load_dotenv()  
-st.set_page_config(page_title="AI Gov Assistant")
-st.write("🔑 OPENAI key loaded:", bool(os.getenv("OPENAI_API_KEY")))
+from langchain_chroma import Chroma
+from langchain_openai import OpenAIEmbeddings
+from langchain.retrievers.multi_query import MultiQueryRetriever
+from langchain_openai import ChatOpenAI
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# ─────────────────────────────────────────────────────────────────────────────
+# 1. Load secrets & configure Streamlit
+# ─────────────────────────────────────────────────────────────────────────────
+load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY", "")
+if not api_key:
+    st.error("🔑 OPENAI_API_KEY not set. Please add it to your .env file.")
+    st.stop()
+
+st.set_page_config(page_title="MDWcare AI Assistant", layout="wide")
+st.title("MDWcare AI Assistant")
+
+client = OpenAI(api_key=api_key)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 2. Load the persisted vector store
+# ─────────────────────────────────────────────────────────────────────────────
+@st.cache_resource(show_spinner="Loading vector store…")
+def load_vectordb(path: str):
+    return Chroma(
+        persist_directory=path,
+        embedding_function=OpenAIEmbeddings()
+    )
+
+vectordb = load_vectordb("data/chroma_db")
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 3. Build the retriever (cached)
+# ─────────────────────────────────────────────────────────────────────────────
+@st.cache_resource(show_spinner=False)
+def get_retriever(db):
+    llm = ChatOpenAI(temperature=0)
+    return MultiQueryRetriever.from_llm(
+        retriever=db.as_retriever(), llm=llm
+    )
+
+retriever = get_retriever(vectordb)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 4. Streamlit query UI
+# ─────────────────────────────────────────────────────────────────────────────
+st.header("Ask about MDW Work-Permit Policy")
+query = st.text_input("Enter your question here")
+if st.button("Search") and query:
+    with st.spinner("Retrieving answers…"):
+        results = retriever.get_relevant_documents(query)
+    if results:
+        for i, doc in enumerate(results, start=1):
+            st.subheader(f"Result {i}")
+            st.write(doc.page_content)
+    else:
+        st.warning("No relevant information found.")
