@@ -1,0 +1,16 @@
+name: Deploy Stub
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploy Stub
+        run: echo "✅ Deploy stub: no real deployment configured yet"
