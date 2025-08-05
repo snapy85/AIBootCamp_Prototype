@@ -1,0 +1,32 @@
+name: Ingest
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt langchain-chroma langchain-community langchain-openai langchain-text-splitters beautifulsoup4
+
+      - name: Run ingestion
+        run: python src/ingest.py
+
+      - name: Upload vector store artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: chroma_db
+          path: data/chroma_db
