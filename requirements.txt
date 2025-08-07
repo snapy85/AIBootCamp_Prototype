@@ -149,7 +149,7 @@ posthog==3.25.0
 pre_commit==4.2.0
 prompt_toolkit==3.0.51
 propcache==0.3.2
-protobuf==6.31.1
+protobuf==5.26.1  # Max compatible with opentelemetry-proto and googleapis-common-protos
 pure_eval==0.2.3
 pyarrow==20.0.0
 pyasn1==0.6.1
