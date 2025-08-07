@@ -1,6 +1,6 @@
 import streamlit as st
 import hmac
-import openai
+#import openai
 import os
 
 st.set_page_config(page_title="MDWcare Login", page_icon="🧾", layout="centered")
