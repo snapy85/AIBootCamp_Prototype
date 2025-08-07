@@ -194,7 +194,7 @@ cython_debug/
 .cursorindexingignore
 
 # Ignore everything in the Chroma DB folder
-data/chroma_db/*
+.chroma
 
 # But do track the placeholder
 !data/chroma_db/.gitkeep
