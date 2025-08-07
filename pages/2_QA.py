@@ -9,6 +9,12 @@ import sys
 import os
 import re
 
+try:
+    import pysqlite3
+    sys.modules["sqlite3"] = pysqlite3
+except ImportError:
+    pass  # Use system sqlite3 if pysqlite3 not available
+
 # Add src folder to sys path to import helpers
 sys.path.append(os.path.abspath("src"))
 from Helpers.filters import is_question_relevant, is_question_safe

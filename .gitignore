@@ -194,13 +194,13 @@ cython_debug/
 .cursorindexingignore
 
 # Ignore everything in the Chroma DB folder
-.chroma
+.chroma/
 
 # But do track the placeholder
-!data/chroma_db/.gitkeep
+#!data/chroma_db/.gitkeep
 
 # Streamlit config and secrets
 .streamlit/
 
 # Ignore Data file
-data/uploaded_files/*
+data/
