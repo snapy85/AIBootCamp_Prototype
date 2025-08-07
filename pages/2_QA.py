@@ -1,3 +1,11 @@
+# --- Must come before chromadb import ---
+import sys
+try:
+    import pysqlite3
+    sys.modules["sqlite3"] = pysqlite3
+except ImportError:
+    pass  # fallback to system sqlite3 if not found
+
 import streamlit as st
 import openai
 import chromadb
@@ -8,12 +16,6 @@ import time
 import sys
 import os
 import re
-
-try:
-    import pysqlite3
-    sys.modules["sqlite3"] = pysqlite3
-except ImportError:
-    pass  # Use system sqlite3 if pysqlite3 not available
 
 # Add src folder to sys path to import helpers
 sys.path.append(os.path.abspath("src"))
