@@ -50,10 +50,10 @@ def load_openai_api_key():
         st.session_state["openai_api_key"] = api_key
 
         # ✅ DEBUGGING ONLY — Your custom debug line
-        st.write("All secrets loaded:", dict(st.secrets))
+        #st.write("All secrets loaded:", dict(st.secrets))
 
         # ✅ Additional debug info (safe)
-        st.write("🔍 DEBUG: API key loaded:", bool(api_key))  # Do not print the key itself
+        #st.write("🔍 DEBUG: API key loaded:", bool(api_key))  # Do not print the key itself
 
         return True
     return False
