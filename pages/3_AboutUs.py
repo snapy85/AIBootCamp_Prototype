@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title("MDWcare Assistant — About Us")
+st.title("MDWHire Assistant — About Us")
 # ---------------------------------------------------------
 # Security: check login (app-level control, not part of RAG/LLM)
 # ---------------------------------------------------------
@@ -14,7 +14,7 @@ st.markdown("""
 
 **Project Summary**
 
-The MDWcare Assistant is a prototype AI-powered web assistant, developed as part of the [AI Bootcamp/Capstone], to help streamline access to government policy information—showcasing how Retrieval-Augmented Generation and modern LLMs can improve clarity and efficiency.
+The MDWHire Assistant is a prototype AI-powered web assistant, developed as part of the [AI Bootcamp/Capstone], to help streamline access to government policy information—showcasing how Retrieval-Augmented Generation and modern LLMs can improve clarity and efficiency.
 
 ---
 
@@ -26,7 +26,7 @@ Working adults in Singapore, especially new parents, struggle to quickly find cl
 
 **2. Proposed Solution**
 
-A single-user, password-protected web prototype, the MDWcare Assistant enables the MOM Advisor Agent to securely log in, upload a MOM policy document, and interact with an AI-powered Q&A interface. This interface only answers based on the uploaded content, ensuring answers are always sourced from the official document (Retrieval-Augmented Generation).
+A single-user, password-protected web prototype, the MDWHire Assistant enables the MOM Advisor Agent to securely log in, upload a MOM policy document, and interact with an AI-powered Q&A interface. This interface only answers based on the uploaded content, ensuring answers are always sourced from the official document (Retrieval-Augmented Generation).
 
 ---
 

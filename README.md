@@ -1,2 +1,2 @@
 # AIBootCamp_Prototype
-Prototype for MDWCare
+Prototype for MDWHire

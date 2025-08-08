@@ -14,7 +14,7 @@ if str(SRC_PATH) not in sys.path:
 
 from Helpers.utility import check_password_multi
 
-st.title("MDWcare Assistant — Document Upload")
+st.title("MDWHire Assistant — Document Upload")
 
 # ✅ Check login
 if not st.session_state.get("password_correct"):

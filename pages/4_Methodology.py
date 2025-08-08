@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title("MDWcare Assistant — Methodology")
+st.title("MDWHire Assistant — Methodology")
 # ---------------------------------------------------------
 # Security: check login (app-level control, not part of RAG/LLM)
 # ---------------------------------------------------------

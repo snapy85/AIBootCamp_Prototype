@@ -2,8 +2,8 @@ import streamlit as st
 import hmac
 import os
 
-st.set_page_config(page_title="MDWcare Login", page_icon="🧾", layout="centered")
-st.title("MDWcare Assistant")
+st.set_page_config(page_title="MDWHire Login", page_icon="🧾", layout="centered")
+st.title("MDWHire Assistant")
 
 # -----------------------------------
 # 🔐 Login Authentication
@@ -63,7 +63,7 @@ def load_openai_api_key():
 # -----------------------------------
 def show_greeting_and_instruction():
     st.success(f"👋 Welcome, **{st.session_state['username']}**!")
-    st.markdown("**Welcome to MDWcare Assistant. Follow the steps below to get started:**")
+    st.markdown("**Welcome to MDWHire Assistant. Follow the steps below to get started:**")
 
     st.info(
         """

@@ -136,7 +136,7 @@ def handle_question(question):
 # ------------------------------
 # 🚀 Start App
 # ------------------------------
-st.title("MDWcare Assistant — Q&A")
+st.title("MDWHire Assistant — Q&A")
 st.caption("Ask about Singapore MDW policies using uploaded documents with GenAI fallback.")
 
 if not st.session_state.get("password_correct"):
